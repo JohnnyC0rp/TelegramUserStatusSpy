@@ -7,8 +7,7 @@ import csv
 
 
 if not os.path.exists("pyrogram_session"):
-    os.makedirs("pyrogram_session\\main_session")
-    os.makedirs("pyrogram_session\\informer_session")
+    os.makedirs("pyrogram_session")
 
 names = {}  # id:(name,lastname,username)
 
@@ -25,13 +24,9 @@ def handle_status_change(client, user):
     if user.id in names:
         info = f"{datetime.now()}: {names[user.id][0]} {names[user.id][1]} ({names[user.id][2]}) is {user.status}"
         print(info)
-        informer_app.send_message(main_acc_username, info)
 
     else:
         user_details = client.get_users(user.id)
-        if user_details.username in restricted_usernames:
-            print("I am not considered, :D")
-            return
         names[user.id] = (
             user_details.first_name,
             user_details.last_name,
@@ -39,7 +34,6 @@ def handle_status_change(client, user):
         )
         info = f"{datetime.now()}: {user_details.first_name} {user_details.last_name} ({user_details.username}) is {user.status} - [NEW USER, DATA SAVED]"
         print(info)
-        informer_app.send_message(main_acc_username, info)
 
     writer.writerow(
         [
@@ -58,19 +52,11 @@ def handle_status_change(client, user):
 
 app = Client(
     "spy_session",
-    workdir="pyrogram_session/main_session/",
+    workdir="pyrogram_session/",
     api_hash=api_hash,
     api_id=api_id,
 )
 app.add_handler(UserStatusHandler(handle_status_change))
 
-informer_app = Client(
-    "informer_session",
-    workdir="pyrogram_session/informer_session/",
-    api_hash=informer_api_hash,
-    api_id=informer_api_id,
-)
 
-app.start()
-informer_app.start()
-idle()
+app.run()

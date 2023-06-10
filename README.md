@@ -8,14 +8,7 @@ To connect api keys, create **api_info.py**:
 ~~~ python 
 api_id = ""
 api_hash = ""
-
-informer_api_id = ""
-informer_api_hash = ""
-
-main_acc_username = ""
-
-restricted_usernames = ["", "", ""]
-
 ~~~ 
 
-Fill this file with your data, restricted usernames will not be tracked, put there usernames of all your accounts
+Fill this file with your data.
+

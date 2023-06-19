@@ -1,10 +1,16 @@
-from pyrogram import Client, idle
+"""This script collects data"""
+
+from pyrogram import Client
 from pyrogram.handlers import UserStatusHandler
-from api_info import *
 import os
 from datetime import datetime
 import csv
 
+try:
+    from api_info import *
+except ModuleNotFoundError:
+    print("Please create file 'api_info.py' and put there your api_id and api_hash.")
+    exit()
 
 if not os.path.exists("pyrogram_session"):
     os.makedirs("pyrogram_session")

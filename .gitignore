@@ -2,4 +2,4 @@
 history.csv
 pyrogram_session/
 api_info.py
-prepared_data_default_plot.json
+processed_data/

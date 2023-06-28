@@ -25,6 +25,12 @@ choice = listdir("processed_data\\clients")[(int(input("Select user: ")) * 2)].r
     ".json", ""
 )
 
+second_choice = input("Select second user for comparison(optional, enter to skip): ")
+if second_choice:
+    second_choice = listdir("processed_data\\clients")[
+        (int(second_choice) * 2)
+    ].replace(".json", "")
+
 with open(
     f"processed_data\\clients\\{choice}.json",
     "r",
@@ -36,17 +42,30 @@ with open(
     "r",
     encoding="utf-8",
 ) as f:
-    print(f"processed_data\\clients\\{choice}_not_smooth.json")
     online_intensity = load(f)
+if second_choice:
+    with open(
+        f"processed_data\\clients\\{second_choice}.json",
+        "r",
+        encoding="utf-8",
+    ) as f:
+        online_intensity_smooth_second = load(f)
 
 generate_x_axes_values()
 y = online_intensity
 y_smooth = online_intensity_smooth
 
+if second_choice:
+    y_smooth_second = online_intensity_smooth_second
+
 fig = px.area(x=x, y=y_smooth)
-fig.add_scatter(x=x, y=y, mode="lines", name="Raw")
+fig.add_scatter(x=x, y=y, mode="lines", name=f"Raw ({choice})")
+if second_choice:
+    fig.add_scatter(x=x, y=y_smooth_second, mode="lines", name=f"{second_choice}")
 fig.update_layout(xaxis=dict(nticks=24, tickformat="%H:%M"), template="plotly_dark")
 fig.update_layout(
-    title=f"{choice}'s online intensity", xaxis_title="24H Time", yaxis_title="Online Count"
+    title=f"{choice}'s online intensity",
+    xaxis_title="24H Time",
+    yaxis_title="Online Count",
 )
 fig.show()

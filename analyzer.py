@@ -205,19 +205,3 @@ for key, value in user.items():
 
 
 print("Process finished. Data is ready for visualization.")
-
-# TODO
-# [x] plot how many online time each user have switched online
-#     [x] process
-#     [x] build
-# [x] how many total time each user spend online
-#     [x] process
-#     [x] build
-# [x] predict sleep activity
-#     [x] process
-#     [x] build
-# [x] line filled under graph of intensity in time, 24h range but draggable 2 points interfere where u can precise set start and end, by default 1 week distance, gaussian or quadratic interpolation between minutes
-#     [x] process
-#     [x] build
-# [x] Same with times online and time online, dependency on all time
-# [ ] add annotations to axes and plots titles and fix file names

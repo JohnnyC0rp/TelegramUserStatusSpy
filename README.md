@@ -29,7 +29,7 @@ api_hash = ""
 
 
 
-## Check the exact time someone was online or offline and predict awake anв asleep time
+## Check the exact time someone was online or offline and predict awake and asleep time
 ![download](https://github.com/MatveyPRO3/TelegramUserStatusSpy/assets/79414726/13fccd62-e682-41d9-a678-9509121bbd1e)
 
 

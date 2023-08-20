@@ -3,3 +3,4 @@ history.csv
 pyrogram_session/
 api_info.py
 processed_data/
+.vscode/

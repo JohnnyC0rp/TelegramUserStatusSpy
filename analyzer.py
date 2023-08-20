@@ -46,6 +46,14 @@ def time_to_seconds(t: str) -> int:
     return (t[0] * 60 * 60) + (t[1] * 60) + t[2]
 
 
+def is_valid_time_format(time_str, format_str):
+    try:
+        datetime.strptime(time_str, format_str)
+        return True
+    except ValueError:
+        return False
+
+
 with open("history.csv", "r", encoding="utf-8") as history:
     print(
         "It may take several minutes to process all data, it depends on history.csv size. Please wait."
@@ -58,6 +66,10 @@ with open("history.csv", "r", encoding="utf-8") as history:
         name = f"{row[1] if row[1] else None} {row[2]if row[2] else None} ({row[3]if row[3] else None})"
         status = 1 if row[-1] == "UserStatus.ONLINE" else 0
         time = row[0]
+        if not is_valid_time_format(time, "%Y-%m-%d %H:%M:%S.%f"):
+            print("Found incorrect row: adding float seconds")
+            print(row)
+            time += ".0"
         date = row[0].split(" ")[0]
 
         if name not in user:

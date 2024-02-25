@@ -20,7 +20,9 @@ names = {}  # id:(name,lastname,username)
 if not os.path.exists("history.csv"):
     history = open("history.csv", "a+", encoding="utf-8", newline="")
     writer = csv.writer(history)
-    writer.writerow(["Time", "First name", "Last name", "Username", "Status"])
+    writer.writerow(
+        ["Time", "Timestamp", "First name", "Last name", "Username", "Status"]
+    )
 else:
     history = open("history.csv", "a+", encoding="utf-8", newline="")
     writer = csv.writer(history)
@@ -43,7 +45,8 @@ def handle_status_change(client, user):
 
     writer.writerow(
         [
-            datetime.now(),
+            current_time := datetime.now(),
+            datetime.timestamp(current_time),
             names[user.id][0],
             names[user.id][1],
             names[user.id][2],
